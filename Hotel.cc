@@ -70,8 +70,9 @@ bool Hotel::getRoom(int roomNumber, Room** room) {
 
 bool Hotel::addReservation(std::string customer, std::string bedType, int capacity, bool fr, Date& date, int duration) {
   for (int i = 0; i < numRooms; i++) {
-    if (rooms[i]->isMatch(bedType, capacity, fr)) {
-      return rooms[i]->addReservation(customer, date, duration);
+    if (rooms[i]->isMatch(bedType, capacity, fr) &&
+        rooms[i]->addReservation(customer, date, duration)) {
+      return true;
     }
   }
   return false;
